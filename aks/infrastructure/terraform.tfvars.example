@@ -1,0 +1,17 @@
+﻿# Azure client id used to create resources
+azure_client_id = ""
+
+# Client secret used to authenticate with Azure apis
+azure_client_secret = ""
+
+# Azure subscription id under which resources will be provisioned
+azure_subscription_id = ""
+
+# Azure tenant id used to create resources
+azure_tenant_id = ""
+
+# Azure location used for all resources
+azure_location = "westeurope"
+
+# Prefix added to names of all resources
+prefix = "example"

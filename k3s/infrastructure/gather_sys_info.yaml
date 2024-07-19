@@ -1,0 +1,13 @@
+---
+- name: Gather system information
+  hosts: all
+  gather_facts: yes
+  serial: 1
+  tasks:
+    - name: Show CPU, RAM, and Storage details
+      debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "CPUs: {{ ansible_processor_vcpus }}"
+          - "Total RAM (GB): {{ '%.2f' | format(ansible_memtotal_mb | float / 1024) }}"
+          - "OS Disk Size (GB): {{ ansible_devices.sda.size | regex_replace(' ', '') }}"

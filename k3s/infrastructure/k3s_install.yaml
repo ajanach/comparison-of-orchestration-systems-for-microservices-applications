@@ -1,0 +1,96 @@
+---
+- name: Setup K3s on Primary Control Plane Node
+  hosts: master_1
+  become: yes
+  serial: 1
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: Stop and disable firewalld - just for research purposes
+      service:
+        name: firewalld
+        state: stopped
+        enabled: no
+
+    - name: Ensure SELinux is permissive - just for research purposes
+      command: setenforce 0
+      ignore_errors: true
+
+    - name: Install K3s on Control Plane Node 01
+      shell: 'curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644 --cluster-init --disable traefik" sh -s - server --node-taint CriticalAddonsOnly=true:NoExecute'
+
+    - name: Get Node Token
+      command: cat /var/lib/rancher/k3s/server/node-token
+      register: node_token
+      failed_when: node_token.rc != 0
+
+- name: Setup K3s on Secondary Control Plane Nodes
+  hosts: master_2
+  become: yes
+  serial: 1
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: Stop and disable firewalld - just for research purposes
+      service:
+        name: firewalld
+        state: stopped
+        enabled: no
+
+    - name: Ensure SELinux is permissive - just for research purposes
+      command: setenforce 0
+      ignore_errors: true
+
+    - name: Install K3s on Remaining Control Plane Nodes
+      shell: 'curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--write-kubeconfig-mode 644 --disable traefik --server https://{{ hostvars["ajanach-thesis-cp-01"]["ansible_host"] }}:6443 --token {{ hostvars["ajanach-thesis-cp-01"]["node_token"].stdout }}" sh -s - server --node-taint CriticalAddonsOnly=true:NoExecute'
+
+- name: Setup K3s on Worker Nodes
+  hosts: worker
+  become: yes
+  serial: 1
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: Stop and disable firewalld - just for research purposes
+      service:
+        name: firewalld
+        state: stopped
+        enabled: no
+
+    - name: Ensure SELinux is permissive - just for research purposes
+      command: setenforce 0
+      ignore_errors: true
+
+    - name: Install K3s on Worker Nodes
+      shell: 'curl -sfL https://get.k3s.io | K3S_URL=https://{{ hostvars["ajanach-thesis-cp-01"]["ansible_host"] }}:6443 K3S_TOKEN={{ hostvars["ajanach-thesis-cp-01"]["node_token"].stdout }} sh -'
+
+- name: Fetch and Update Kubeconfig on Control Node
+  hosts: master_1
+  become: yes
+  tasks:
+    - name: Fetch kubeconfig from Control Plane Node 01
+      fetch:
+        src: /etc/rancher/k3s/k3s.yaml
+        dest: /tmp/k3s.yaml
+        flat: true
+
+- name: Copy kubeconfig to Local Control Node
+  hosts: localhost
+  become: false
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: Replace server value in kubeconfig
+      shell: "sed -i 's|server: https://127.0.0.1:6443|server: https://{{ hostvars['ajanach-thesis-cp-01']['ansible_host'] }}:6443|' /tmp/k3s.yaml"
+
+    - name: Create .kube directory if it doesn't exist
+      file:
+        path: "{{ ansible_env.HOME }}/.kube"
+        state: directory
+        mode: '0755'
+
+    - name: Copy kubeconfig to ~/.kube/config
+      copy:
+        src: /tmp/k3s.yaml
+        dest: "{{ ansible_env.HOME }}/.kube/config"
+        force: true

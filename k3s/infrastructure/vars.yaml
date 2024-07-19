@@ -1,0 +1,1 @@
+k3s_server_ip: "10.10.48.151"  # Change to the correct IP address for the K3s server

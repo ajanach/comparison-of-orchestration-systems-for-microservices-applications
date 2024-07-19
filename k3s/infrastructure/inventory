@@ -1,0 +1,15 @@
+[master_1]
+ajanach-thesis-cp-01 ansible_host=10.10.48.151
+
+[master_2]
+ajanach-thesis-cp-02 ansible_host=10.10.48.152
+ajanach-thesis-cp-03 ansible_host=10.10.48.153
+
+[worker]
+ajanach-thesis-wn-01 ansible_host=10.10.48.154
+ajanach-thesis-wn-02 ansible_host=10.10.48.155
+
+[production:children]
+master_1
+master_2
+worker
