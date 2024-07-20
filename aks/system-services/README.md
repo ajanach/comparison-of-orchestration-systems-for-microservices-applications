@@ -34,6 +34,7 @@ To access the Grafana GUI, set up port forwarding:
 ```bash
 kubectl port-forward svc/kube-prometheus-stack-grafana 3000:80 &
 ```
+**Note:** It may take a few minutes for the `kube-prometheus-stack` to be online.
 
 After setting up port forwarding, open your favorite browser and navigate to http://localhost:3000.
 

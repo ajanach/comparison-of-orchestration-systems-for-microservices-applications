@@ -1,10 +1,12 @@
 # Project Overview
-This documentation provides a comprehensive guide to setting up and managing Kubernetes clusters using both Azure Kubernetes Service (AKS) and k3s. It includes instructions for infrastructure setup, deploying application services, and configuring system services for monitoring and management. The aim of this thesis is to conduct a detailed comparison of different orchestration tools such as Azure Kubernetes Service, K3S. The comparison is based on a case study of orchestrating a microservices application of medium complexity consisting of 5 to 20 microservices. 
+This documentation is part of a case study comparing different orchestration tools such as Azure Kubernetes Service (AKS) and K3s. It provides a comprehensive guide to deploying infrastructure, application services, and system services in both AKS and K3s Kubernetes clusters.
 
-The two main results will be a formal process for selecting the optimal orchestration platform and a comprehensive comparison of the studied orchestration tools for the specific microservices application. The optimal orchestration tool will be selected based on the measured data and analysis of the collected information.
+The aim is to orchestrate a medium-complexity microservices application (5 to 20 microservices) and compare the performance, cost-effectiveness, and ease of use of these tools.
+
+The two main results will be a formal process for selecting the optimal orchestration platform and a comprehensive comparison of the studied orchestration tools for the specific microservices application. The optimal orchestration tool will be selected based on measured data and analysis of the collected information.
 
 ## Application Overview
-Online Boutique is a cloud-first microservices demo application. The application is a web-based e-commerce app where users can browse items, add them to the cart, and purchase them. This application will be deployed using the orchestration tools being compared.
+For testing purposes, this application will be deployed using the orchestration tools being compared. Online Boutique is a cloud-first microservices demo application. The application is a web-based e-commerce app where users can browse items, add them to the cart, and purchase them.
 
 URL of GitHub repo to microservices-demo application: [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo)
 
@@ -22,19 +24,18 @@ URL of GitHub repo to microservices-demo application: [microservices-demo](https
 
 1. Clone the GitHub repository:
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/ajanach/comparison-of-orchestration-systems-for-microservices-applications.git
     ```
 
 2. Navigate to the infrastructure directory:
     ```bash
     cd aks/infrastructure
     ```
-    Edit the terraform.tfvars with the correct credentials for your Terraform Service Provider.
-
 3. Copy the example Terraform variables file:
     ```bash
     cp terraform.tfvars.example terraform.tfvars
     ```
+   **NOTE:** Edit the terraform.tfvars file with the correct credentials for your Terraform service provider on Azure.
 
 4. Initialize Terraform:
     ```bash
@@ -61,6 +62,12 @@ URL of GitHub repo to microservices-demo application: [microservices-demo](https
     ```bash
     kubectl get nodes
     ```
+   Output as a reference:
+    ```bash
+    NAME                           STATUS   ROLES   AGE     VERSION
+    aks-a2v2-96764596-vmss000000   Ready    agent   3m36s   v1.28.10
+    aks-a2v2-96764596-vmss000001   Ready    agent   3m41s   v1.28.10
+    ```
 
 ## AKS - Application Services
 
@@ -85,6 +92,7 @@ Deploy the microservices demo application:
     ```bash
     http://<external_IP>
     ```
+   **Note:** It may take a few minutes for the platform to be online.
 
 ## AKS - System Services
 Refer to the detailed documentation for deploying the monitoring stack in your AKS infrastructure:
@@ -170,7 +178,6 @@ kubectl get nodes -o wide
 
 Example output:
 ```bash
-$ kubectl get nodes -o wide
 NAME                   STATUS   ROLES                       AGE   VERSION        INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                      KERNEL-VERSION                 CONTAINER-RUNTIME
 ajanach-thesis-cp-01   Ready    control-plane,etcd,master   17h   v1.29.6+k3s2   10.10.48.151   <none>        Rocky Linux 9.4 (Blue Onyx)   5.14.0-427.24.1.el9_4.x86_64   containerd://1.7.17-k3s1
 ajanach-thesis-cp-02   Ready    control-plane,etcd,master   17h   v1.29.6+k3s2   10.10.48.152   <none>        Rocky Linux 9.4 (Blue Onyx)   5.14.0-427.24.1.el9_4.x86_64   containerd://1.7.17-k3s1
