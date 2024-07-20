@@ -119,7 +119,7 @@ Requirements:
 - kubectl
 - helm
 
-Note: All editings are done in `aks/infrastructure` directory.
+**Note:** All editings are done in `aks/infrastructure` directory.
 
 Edit the inventory file with appropriate IP addresses of your VMs:
 
@@ -204,12 +204,13 @@ Deploy the microservices demo application:
     ```bash
     kubectl get service frontend-external | awk '{print $4}'
     ```
-   Note: You will get a list of IP addresses, each representing the IP address of a node. This means that the application is available through the IP addresses of all nodes.
+   **Note:** You will get a list of IP addresses, each representing the IP address of a node. This means that the application is available through the IP addresses of all nodes.
 
 4. Open your favorite browser and navigate to:
     ```bash
     http://<external_IP>
     ```
+   **Note:** It may take a few minutes for the platform to be online.
 
 ## K3s - System Services
 Refer to the detailed documentation for deploying the monitoring stack in your K3s infrastructure:
