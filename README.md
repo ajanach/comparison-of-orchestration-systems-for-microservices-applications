@@ -6,7 +6,7 @@ The aim is to orchestrate a medium-complexity microservices application (5 to 20
 The two main results will be a formal process for selecting the optimal orchestration platform and a comprehensive comparison of the studied orchestration tools for the specific microservices application. The optimal orchestration tool will be selected based on measured data and analysis of the collected information.
 
 ## Application Overview
-For testing purposes, this application will be deployed using the orchestration tools being compared. Online Boutique is a cloud-first microservices demo application. The application is a web-based e-commerce app where users can browse items, add them to the cart, and purchase them.
+For testing purposes, the Online Boutique application will be deployed using the orchestration tools being compared. Online Boutique is a web-based e-commerce app where users can browse items, add them to the cart, and purchase them.
 
 URL of GitHub repo to microservices-demo application: [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo)
 
@@ -35,7 +35,7 @@ URL of GitHub repo to microservices-demo application: [microservices-demo](https
     ```bash
     cp terraform.tfvars.example terraform.tfvars
     ```
-   **NOTE:** Edit the terraform.tfvars file with the correct credentials for your Terraform service provider on Azure.
+   **NOTE:** The terraform.tfvars file should be edited with the correct credentials for the Terraform service provider on Azure.
 
 4. Initialize Terraform:
     ```bash
@@ -88,15 +88,15 @@ Deploy the microservices demo application:
     kubectl get service frontend-external | awk '{print $4}'
     ```
 
-4. Open your favorite browser and navigate to:
+4. Open favorite browser and navigate to:
     ```bash
     http://<external_IP>
     ```
    **Note:** It may take a few minutes for the platform to be online.
 
 ## AKS - System Services
-Refer to the detailed documentation for deploying the monitoring stack in your AKS infrastructure:
-[aks system-services README](aks/system-services/README.md), a step-by-step guide on setting up and accessing the kube-prometheus-stack using Helm in your k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
+Refer to the detailed documentation for deploying the monitoring stack in the AKS infrastructure:
+[aks system-services README](aks/system-services/README.md).This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
 
 
 # K3S
@@ -121,7 +121,7 @@ Requirements:
 
 **Note:** All editings are done in `aks/infrastructure` directory.
 
-Edit the inventory file with appropriate IP addresses of your VMs:
+Edit the inventory file with appropriate IP addresses of VMs:
 
 ```ini
 [master_1]
@@ -171,7 +171,7 @@ Run Ansible playbook to install production K3s Cluster:
 ansible-playbook -i inventory k3s_install.yaml
 ```
 
-You can test on your workstation if the Kubernetes cluster is available by running:
+The availability of the Kubernetes cluster can be tested on the workstation by running:
 ```bash
 kubectl get nodes -o wide
 ```
@@ -204,14 +204,14 @@ Deploy the microservices demo application:
     ```bash
     kubectl get service frontend-external | awk '{print $4}'
     ```
-   **Note:** You will get a list of IP addresses, each representing the IP address of a node. This means that the application is available through the IP addresses of all nodes.
+   **Note:** A list of IP addresses will be provided, each representing the IP address of a node. This means that the application is available through the IP addresses of all nodes.
 
-4. Open your favorite browser and navigate to:
+4. Open favorite browser and navigate to:
     ```bash
     http://<external_IP>
     ```
    **Note:** It may take a few minutes for the platform to be online.
 
 ## K3s - System Services
-Refer to the detailed documentation for deploying the monitoring stack in your K3s infrastructure:
-[k3s Infrastructure README](k3s/system-services/README.md), a step-by-step guide on setting up and accessing the kube-prometheus-stack using Helm in your k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
+Refer to the detailed documentation for deploying the monitoring stack in the AKS infrastructure:
+[k3s Infrastructure README](k3s/system-services/README.md). This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
