@@ -119,6 +119,16 @@ Requirements:
 - kubectl
 - helm
 
+1. Clone the GitHub repository:
+    ```bash
+    git clone https://github.com/ajanach/comparison-of-orchestration-systems-for-microservices-applications.git
+    ```
+
+2. Navigate to the infrastructure directory:
+    ```bash
+    cd k3s/infrastructure
+    ```
+
 **Note:** All editings are done in `aks/infrastructure` directory.
 
 Edit the inventory file with appropriate IP addresses of VMs:
@@ -162,7 +172,6 @@ k3s_server_ip: "<IP_CONTROL_PLANE_01>"  # Change to the correct IP address for t
 
 Run ping playbooks to test reachability to managed hosts:
 ```bash
-cd k3s/infrastructure
 ansible -i inventory all -m ping
 ```
 
