@@ -129,7 +129,7 @@ Requirements:
     cd k3s/infrastructure
     ```
 
-**Note:** All editings are done in `aks/infrastructure` directory.
+**Note:** All editings are done in `k3s/infrastructure` directory.
 
 Edit the inventory file with appropriate IP addresses of VMs:
 
@@ -201,7 +201,7 @@ Deploy the microservices demo application:
 
 1. Navigate to the application services directory:
     ```bash
-    cd aks/application-services
+    cd k3s/application-services
     ```
 
 2. Apply the Kubernetes manifests:
@@ -222,5 +222,5 @@ Deploy the microservices demo application:
    **Note:** It may take a few minutes for the platform to be online.
 
 ## K3s - System Services
-Refer to the detailed documentation for deploying the monitoring stack in the AKS infrastructure:
-[k3s Infrastructure README](k3s/system-services/README.md). This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
+Refer to the detailed documentation for deploying the monitoring stack in the K3s system-services:
+[k3s system-services README](k3s/system-services/README.md). This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
