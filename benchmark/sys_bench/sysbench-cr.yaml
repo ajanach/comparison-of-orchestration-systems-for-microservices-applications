@@ -1,0 +1,51 @@
+apiVersion: ripsaw.cloudbulldozer.io/v1alpha1
+kind: Benchmark
+metadata:
+  name: sysbench-benchmark-01
+  namespace: benchmark-operator
+spec:
+  workload:
+    name: sysbench
+    args:
+      enabled: true
+      pin_node: "ajanach-thesis-wn-01"
+      tests:
+      - name: cpu
+        parameters:
+          cpu-max-prime: 1000
+      - name: memory
+        parameters:
+          memory-block-size: 1M
+          memory-total-size: 3G
+          memory-scope: global
+          memory-oper: read
+          memory-access-mode: rnd
+      - name: fileio
+        parameters:
+          file-test-mode: rndrw
+---
+apiVersion: ripsaw.cloudbulldozer.io/v1alpha1
+kind: Benchmark
+metadata:
+  name: sysbench-benchmark-02
+  namespace: benchmark-operator
+spec:
+  workload:
+    name: sysbench
+    args:
+      enabled: true
+      pin_node: "ajanach-thesis-wn-02"
+      tests:
+      - name: cpu
+        parameters:
+          cpu-max-prime: 1000
+      - name: memory
+        parameters:
+          memory-block-size: 1M
+          memory-total-size: 3G
+          memory-scope: global
+          memory-oper: read
+          memory-access-mode: rnd
+      - name: fileio
+        parameters:
+          file-test-mode: rndrw

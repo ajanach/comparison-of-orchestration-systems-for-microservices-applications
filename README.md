@@ -224,3 +224,12 @@ Deploy the microservices demo application:
 ## K3s - System Services
 Refer to the detailed documentation for deploying the monitoring stack in the K3s system-services:
 [k3s system-services README](k3s/system-services/README.md). This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
+
+# Benchmarking Worker Nodes
+
+## Benchmarking Guides
+[Sysbench Benchmark Guide](benchmark/sys_bench/README.md): This guide provides instructions for running Sysbench to test CPU, memory, and I/O performance on your Kubernetes cluster.
+
+[AB HTTP Benchmark Guide](benchmark/ab_http_bench/README.md): This guide covers the installation and execution of Apache Benchmark (AB) for HTTP load testing.
+
+[K6 HTTP Benchmark Guide](benchmark/k6_http_bench/README.md): This guide explains how to install and run K6 for performance testing with a script.

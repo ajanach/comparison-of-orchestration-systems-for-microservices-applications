@@ -25,6 +25,7 @@ metadata:
   labels:
     app: currencyservice
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: currencyservice
@@ -703,6 +704,7 @@ metadata:
   labels:
     app: frontend
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: frontend
@@ -783,11 +785,11 @@ spec:
           #   value: "" # This value would look like "http://123.123.123"
           resources:
             requests:
-              cpu: 100m
-              memory: 64Mi
+              cpu: 500m
+              memory: 512Mi
             limits:
-              cpu: 200m
-              memory: 128Mi
+              cpu: 1000m
+              memory: 1024Mi
 ---
 apiVersion: v1
 kind: Service
