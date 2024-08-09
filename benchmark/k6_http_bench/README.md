@@ -33,8 +33,8 @@ import { check, sleep } from 'k6';
 
 export let options = {
   stages: [
-    { duration: '30s', target: 5000 },  // ramp-up to 5000 VUs
-    { duration: '1m', target: 10000 },  // ramp-up to 10000 VUs
+    { duration: '30s', target: 250 },  // ramp-up to 250 VUs
+    { duration: '1m', target: 500 },  // ramp-up to 500 VUs
     { duration: '30s', target: 0 },   // ramp-down to 0 VUs
   ],
 };
@@ -59,8 +59,8 @@ k6 run load_test.js
 ### Explanation of the Script:
 
 - **Stages**: Defines the different phases of the test.
-  - `{ duration: '30s', target: 5000 }`: Ramp-up to 5000 virtual users (VUs) over 30 seconds.
-  - `{ duration: '1m', target: 10000 }`: Ramp-up to 10000 VUs over 1 minute.
+  - `{ duration: '30s', target: 250 }`: Ramp-up to 250 virtual users (VUs) over 30 seconds.
+  - `{ duration: '1m', target: 500 }`: Ramp-up to 500 VUs over 1 minute.
   - `{ duration: '30s', target: 0 }`: Ramp-down to 0 VUs over 30 seconds.
 - **HTTP Request**: The script performs a GET request to `http://10.10.48.155`.
 - **Checks**: Verifies that the response status is 200.
