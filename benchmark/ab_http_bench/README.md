@@ -24,14 +24,14 @@ sudo apt-get install apache2-utils
 Replace `http://10.10.48.155/` with the actual URL of your service.
 
 ```bash
-ab -k -n 15000 -c 1000 -l -H "Accept-Encoding: gzip, deflate" http://10.10.48.155/
+ab -k -n 1000 -c 100 -l -H "Accept-Encoding: gzip, deflate" http://10.10.48.155/
 ```
 
 **Explanation of the command:**
 
 - `-k`: Enables HTTP Keep-Alive, which means multiple requests will be sent over the same connection.
-- `-n 15000`: Specifies the total number of requests to perform.
-- `-c 1000`: Specifies the concurrency level (1000 multiple requests at a time).
+- `-n 1000`: Specifies the total number of requests to perform.
+- `-c 100`: Specifies the concurrency level (1000 multiple requests at a time).
 - `-l`: Accepts response sizes larger than the internal memory buffer.
 - `-H "Accept-Encoding: gzip, deflate"`: Adds a custom HTTP header to the request.
 - `http://10.10.48.155/`: The URL of the service being tested.

@@ -1,18 +1,16 @@
 
 # K6 Load Testing Guide
 
-This guide provides instructions for installing K6, creating a load test script, and running it to perform load testing on your web service.
+This guide provides instructions for installing K6, configuring the load test script, and running it to perform load testing.
 
 ## Installation
-
-### Prerequisites
-
-- A Kubernetes cluster
-- `kubectl` command-line tool installed
 
 ### Installing K6
 
 #### Ubuntu/Debian
+
+To install K6 on Ubuntu or Debian, use the following commands:
+
 ```bash
 sudo gpg -k
 sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
@@ -21,36 +19,22 @@ sudo apt-get update
 sudo apt-get install k6
 ```
 
-## Creating the Load Test Script
+## Configuring the Load Test Script
 
-Create a file named `load_test.js` with the following content:
-
-Replace `http://10.10.48.155/` with the actual URL of your service.
+1. **Edit the `load_test.js` Script**: 
+   - Navigate to the directory containing the `load_test.js` script in GitHub folder.
+   - Open the `load_test.js` file in a text editor.
+   - Replace the `const BASE_URL = 'http://10.10.48.155/';` line with the actual URL of your service.
 
 ```javascript
-import http from 'k6/http';
-import { check, sleep } from 'k6';
-
-export let options = {
-  stages: [
-    { duration: '30s', target: 250 },  // ramp-up to 250 VUs
-    { duration: '1m', target: 500 },  // ramp-up to 500 VUs
-    { duration: '30s', target: 0 },   // ramp-down to 0 VUs
-  ],
-};
-
-export default function () {
-  let res = http.get('http://10.10.48.155');
-  check(res, {
-    'is status 200': (r) => r.status === 200,
-  });
-  sleep(1);
-}
+const BASE_URL = 'http://<your_service_url>/';
 ```
+
+2. Save the changes.
 
 ## Running the Load Test
 
-Run the K6 load test with the following command:
+To run the K6 load test, execute the following command:
 
 ```bash
 k6 run load_test.js
@@ -58,18 +42,22 @@ k6 run load_test.js
 
 ### Explanation of the Script:
 
-- **Stages**: Defines the different phases of the test.
-  - `{ duration: '30s', target: 250 }`: Ramp-up to 250 virtual users (VUs) over 30 seconds.
-  - `{ duration: '1m', target: 500 }`: Ramp-up to 500 VUs over 1 minute.
-  - `{ duration: '30s', target: 0 }`: Ramp-down to 0 VUs over 30 seconds.
-- **HTTP Request**: The script performs a GET request to `http://10.10.48.155`.
-- **Checks**: Verifies that the response status is 200.
-- **Sleep**: Adds a sleep of 1 second between each iteration.
+- **Stages**: The script defines three stages to simulate different phases of user activity:
+  - `{ duration: '30s', target: 100 }`: Ramp-up to 100 virtual users (VUs) over 30 seconds.
+  - `{ duration: '30s', target: 200 }`: Ramp-up to 200 VUs over the next 30 seconds.
+  - `{ duration: '30', target: 0 }`: Ramp-down to 0 VUs, simulating the end of the load.
+
+- **User Actions**: The script simulates a typical user journey:
+  - **Visit Homepage**: Simulates a user visiting the homepage of the application.
+  - **Browse Products**: Simulates browsing through product pages.
+  - **Add to Cart**: Adds selected products to the shopping cart.
+  - **Proceed to Checkout**: Simulates the checkout process, including entering payment and shipping information.
+  - **Return to Homepage**: After completing the purchase, the user returns to the homepage.
+
+- **Checks**: The script includes checks after each HTTP request to verify that the operation was successful by checking for a `200 OK` status.
+
+- **Randomized Sleep**: The `sleep(randomIntBetween(1, 3))` function adds a randomized delay between actions to better simulate real user behavior.
 
 ## Viewing Results
 
-K6 will display the results directly in the terminal, showing metrics such as response time, request rate, and more.
-
-## Cleaning Up
-
-To clean up, simply delete the `load_test.js` file if it is no longer needed.
+K6 will display the results directly in the terminal, showing metrics such as response time, request rate, and error rates. This output provides insights into how well the application performs under the simulated load.
