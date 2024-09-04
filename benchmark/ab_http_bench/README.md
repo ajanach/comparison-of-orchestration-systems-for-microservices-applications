@@ -31,7 +31,7 @@ ab -k -n 1000 -c 100 -l -H "Accept-Encoding: gzip, deflate" http://10.10.48.155/
 
 - `-k`: Enables HTTP Keep-Alive, which means multiple requests will be sent over the same connection.
 - `-n 1000`: Specifies the total number of requests to perform.
-- `-c 100`: Specifies the concurrency level (1000 multiple requests at a time).
+- `-c 100`: Specifies the concurrency level (100s multiple requests at a time).
 - `-l`: Accepts response sizes larger than the internal memory buffer.
 - `-H "Accept-Encoding: gzip, deflate"`: Adds a custom HTTP header to the request.
 - `http://10.10.48.155/`: The URL of the service being tested.
