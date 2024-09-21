@@ -1,8 +1,8 @@
 # Project Overview
 
-This repository is part of a case study that compares different orchestration tools, specifically Azure Kubernetes Service (AKS) and K3S. The study aims to provide a detailed guide for deploying infrastructure, application services, and system services in both AKS and K3S Kubernetes clusters.
+This repository is part of a case study that compares different orchestration tools, specifically Azure Kubernetes Service (AKS) and K3S. The study provides a detailed guide for deploying infrastructure, application services, and system services in both AKS and K3S Kubernetes clusters.
 
-The primary objective is to orchestrate a medium-complexity microservices application (consisting of 15 microservices) and evaluate the performance, cost-effectiveness, and ease of use of these orchestration tools. 
+The primary objective is to orchestrate a medium-complexity microservices application (consisting of 15 microservices) and evaluate the performance, cost-effectiveness, and ease of use of these orchestration tools.
 
 In this repository, you can find:
 - **Key factors** to consider when selecting an orchestration system.
@@ -15,8 +15,11 @@ In this repository, you can find:
 - How to use **YAML manifests** to configure Kubernetes resources.
 - How to use **Helm** to deploy **Prometheus** and **Grafana** for monitoring.
 
+## Master's Thesis Defense Video
+For a more in-depth explanation of the project, you can watch my Master's thesis defense video (in Croatian): [YouTube: Master's Thesis Defense](https://youtu.be/kA0KqmDsE-o?si=t1cm3dUOhIdhaBtB)
+
 ## Application Overview
-For testing purposes, the Online Boutique application will be deployed using the orchestration tools being compared. Online Boutique is a web-based e-commerce app where users can browse items, add them to the cart, and purchase them.
+For testing purposes, the Online Boutique application is deployed using the orchestration tools being compared. Online Boutique is a web-based e-commerce app where users can browse items, add them to the cart, and purchase them.
 
 URL of GitHub repo to microservices-demo application: [microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo)
 
