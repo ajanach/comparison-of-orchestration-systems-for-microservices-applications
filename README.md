@@ -1,9 +1,19 @@
 # Project Overview
-This documentation is part of a case study comparing different orchestration tools such as Azure Kubernetes Service (AKS) and K3s. It provides a comprehensive guide to deploying infrastructure, application services, and system services in both AKS and K3s Kubernetes clusters.
 
-The aim is to orchestrate a medium-complexity microservices application (5 to 20 microservices) and compare the performance, cost-effectiveness, and ease of use of these tools.
+This repository is part of a case study that compares different orchestration tools, specifically Azure Kubernetes Service (AKS) and K3S. The study aims to provide a detailed guide for deploying infrastructure, application services, and system services in both AKS and K3S Kubernetes clusters.
 
-The two main results will be a formal process for selecting the optimal orchestration platform and a comprehensive comparison of the studied orchestration tools for the specific microservices application. The optimal orchestration tool will be selected based on measured data and analysis of the collected information.
+The primary objective is to orchestrate a medium-complexity microservices application (consisting of 15 microservices) and evaluate the performance, cost-effectiveness, and ease of use of these orchestration tools. 
+
+In this repository, you can find:
+- **Key factors** to consider when selecting an orchestration system.
+- Guidelines on **when to use AKS vs K3S**, highlighting their strengths in different scenarios.
+- How to **benchmark the performance** of orchestration systems.
+- How to **estimate the costs** of running microservices applications in the cloud versus on-premise.
+- **Basic knowledge** about Kubernetes, AKS, and K3S.
+- How to use **Terraform** to deploy infrastructure in Azure.
+- How to use **Ansible** to automate the configuration and deployment of a K3S cluster.
+- How to use **YAML manifests** to configure Kubernetes resources.
+- How to use **Helm** to deploy **Prometheus** and **Grafana** for monitoring.
 
 ## Application Overview
 For testing purposes, the Online Boutique application will be deployed using the orchestration tools being compared. Online Boutique is a web-based e-commerce app where users can browse items, add them to the cart, and purchase them.
