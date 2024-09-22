@@ -109,13 +109,13 @@ Deploy the microservices demo application:
 
 ## AKS - System Services
 Refer to the detailed documentation for deploying the monitoring stack in the AKS infrastructure:
-[aks system-services README](aks/system-services/README.md).This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
+[aks system-services README](aks/system-services/README.md).This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a K3S environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
 
 
 # K3S
 
-## k3s - Infrastructure
-The following table outlines the configuration in vSphere for virtual machines for the K3s Kubernetes Cluster:
+## K3S - Infrastructure
+The following table outlines the configuration in vSphere for virtual machines for the K3S Kubernetes Cluster:
 | Host                    | CPUs | Total RAM (GB) | OS Disk Size (GB) |
 |-------------------------|------|----------------|--------------------|
 | ajanach-thesis-cp-01    | 2    | 4.06           | 50.00              |
@@ -180,7 +180,7 @@ become_ask_pass = false
 
 Edit vars.yaml:
 ```yaml
-k3s_server_ip: "<IP_CONTROL_PLANE_01>"  # Change to the correct IP address for the K3s master_1 server
+k3s_server_ip: "<IP_CONTROL_PLANE_01>"  # Change to the correct IP address for the K3S master_1 server
 ```
 
 Run ping playbooks to test reachability to managed hosts:
@@ -188,7 +188,7 @@ Run ping playbooks to test reachability to managed hosts:
 ansible -i inventory all -m ping
 ```
 
-Run Ansible playbook to install production K3s Cluster:
+Run Ansible playbook to install production K3S Cluster:
 ```bash
 ansible-playbook -i inventory k3s_install.yaml
 ```
@@ -208,7 +208,7 @@ ajanach-thesis-wn-01   Ready    <none>                      17h   v1.29.6+k3s2  
 ajanach-thesis-wn-02   Ready    <none>                      17h   v1.29.6+k3s2   10.10.48.155   <none>        Rocky Linux 9.4 (Blue Onyx)   5.14.0-427.24.1.el9_4.x86_64   containerd://1.7.17-k3s1
 ```
 
-## K3s - Application Services
+## K3S - Application Services
 
 Deploy the microservices demo application:
 
@@ -234,9 +234,9 @@ Deploy the microservices demo application:
     ```
    **Note:** It may take a few minutes for the platform to be online.
 
-## K3s - System Services
-Refer to the detailed documentation for deploying the monitoring stack in the K3s system-services:
-[k3s system-services README](k3s/system-services/README.md). This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a k3s environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
+## K3S - System Services
+Refer to the detailed documentation for deploying the monitoring stack in the K3S system-services:
+[K3S system-services README](k3s/system-services/README.md). This step-by-step guide covers setting up and accessing the kube-prometheus-stack using Helm in a K3S environment. The kube-prometheus-stack is a comprehensive monitoring solution that includes Prometheus, Grafana, and other essential monitoring components.
 
 # Benchmarking Worker Nodes
 
